@@ -110,7 +110,6 @@ const COUNTRIES = [
     currency: "AUD",
     languages: "Англи хэл",
   },
-  // ... бусад улс
 ];
 
 export default function Surah() {
@@ -155,7 +154,7 @@ export default function Surah() {
         ? c.region === "Африк"
         : selectedRegion === "Австрали"
         ? c.region === "Австрали"
-        : c.region.includes(selectedRegion); // Ази, Европ
+        : c.region.includes(selectedRegion);
 
     const searchMatch = c.name.toLowerCase().includes(searchText.toLowerCase());
     return regionMatch && searchMatch;
@@ -172,172 +171,140 @@ export default function Surah() {
   ];
 
   return (
-    <div
-      className={`bg-[#01060c] min-h-screen ${isOpen ? "overflow-hidden" : ""}`}
-    >
-      <div className="max-w-6xl mx-auto bg-[#01060c] min-h-screen relative">
-        <div className="flex p-[10px]">
-          <div>
-            <Link
-              href="/nuur"
-              class="flex items-center  text-sm pt-[20px] rounded-md gap-2 px-3 "
+    <div className="bg-[#01060c] min-h-screen text-white">
+      <div className="max-w-6xl mx-auto p-4">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-6">
+          <Link
+            href="/nuur"
+            className="flex items-center gap-2 text-sm hover:text-[#00a6e1] transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-4 w-4"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="h-4 w-4 mr-2 text-white"
-              >
-                <path d="m12 19-7-7 7-7"></path>
-                <path d="M19 12H5"></path>
-              </svg>
-              <h1 className="text-white">Буцах</h1>
-            </Link>
-          </div>
-          <div className="pl-[10px]">
-            <h1 className="text-white">Суралцах горим</h1>
+              <path d="m12 19-7-7 7-7"></path>
+              <path d="M19 12H5"></path>
+            </svg>
+            Буцах
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold">Суралцах горим</h1>
             <p className="text-[#a39e98]">
               Улс орон, нийслэлүүдийг дэлгэрэнгүй судлаарай
             </p>
           </div>
         </div>
 
-        <div className="px-6">
-          <div className="border-2 border-[#19232b] p-[10px] w-full rounded-xl mb-4">
-            <input
-              type="search"
-              placeholder="Улс орон хайх..."
-              className="text-[#a39e98] bg-transparent outline-none w-full"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </div>
-
-          <div className="bg-[#0d171f] text-muted-foreground h-9 items-center justify-center rounded-lg p-[3px] grid w-full grid-cols-4 lg:grid-cols-7 mb-6">
-            {regions.map((r) => (
-              <button
-                key={r}
-                onClick={() => setSelectedRegion(r)}
-                className={`inline-flex items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 font-medium text-xs ${
-                  selectedRegion === r
-                    ? "text-[#00a6e1]"
-                    : "text-white hover:bg-[#01060c]"
-                }`}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCountries.map((c) => (
-              <div
-                key={c.code}
-                className="flex flex-col gap-6 rounded-xl border py-6 shadow-sm hover:shadow-lg transition-shadow cursor-pointer group ring-2 ring-primary/20 bg-primary/5"
-              >
-                <div className="px-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="text-3xl">{c.flag}</div>
-                      <div>
-                        <div className="font-semibold text-white text-lg">
-                          {c.name}
-                        </div>
-                        <div className="text-[#a39e98] text-sm">
-                          {c.capital}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
-                    <span className="text-[#a39e98]">{c.region}</span>
-                    <span className="text-[#a39e98]">{c.subregion}</span>
-                  </div>
-
-                  <button
-                    onClick={() => openModal(c)}
-                    className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium border shadow-xs h-9 px-4 py-2 w-full text-white"
-                  >
-                    Дахин үзэх
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Search */}
+        <div className="mb-4">
+          <input
+            type="search"
+            placeholder="Улс орон хайх..."
+            className="w-full p-3 rounded-xl bg-[#19232b] text-white outline-none placeholder:text-[#a39e98]"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
         </div>
 
-        {/* Modal */}
-        {isOpen && selected && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
+        {/* Regions */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {regions.map((r) => (
+            <button
+              key={r}
+              onClick={() => setSelectedRegion(r)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                selectedRegion === r
+                  ? "bg-[#00a6e1] text-white"
+                  : "bg-[#19232b] text-[#a39e98] hover:bg-[#0b93c7] hover:text-white"
+              }`}
+            >
+              {r}
+            </button>
+          ))}
+        </div>
+
+        {/* Country Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCountries.map((c) => (
             <div
-              onClick={closeModal}
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            ></div>
-
-            <div className="relative max-w-md w-full mx-4 bg-[#071017] rounded-2xl shadow-lg ring-1 ring-white/5 p-6">
-              <div className="flex flex-col items-center">
-                <div className="flex items-start justify-between gap-4 w-full">
-                  <div>
-                    <div className="text-3xl mb-2">
-                      {selected.flag}{" "}
-                      <span className="ml-2 text-xl font-semibold text-white">
-                        {selected.name}
-                      </span>
-                    </div>
-                    <div className="text-sm text-[#a39e98]">
-                      Нийслэл: {selected.capital}
-                    </div>
-                  </div>
-                  <button
-                    onClick={closeModal}
-                    aria-label="Close"
-                    className="text-[#a39e98] hover:text-white"
-                  >
-                    ✕
-                  </button>
-                </div>
+              key={c.code}
+              className="flex flex-col items-center gap-4 rounded-2xl p-6 bg-[#0d171f] shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+            >
+              <div className="text-6xl">{c.flag}</div>
+              <div className="text-xl font-semibold">{c.name}</div>
+              <div className="text-[#a39e98]">{c.capital}</div>
+              <div className="flex justify-between w-full text-sm text-[#a39e98]">
+                <span>{c.region}</span>
+                <span>{c.subregion}</span>
               </div>
+              <button
+                onClick={() => openModal(c)}
+                className="w-full py-2 mt-2 rounded-xl bg-gradient-to-r from-[#0b93c7] to-[#00a6e1] hover:from-[#00a6e1] hover:to-[#0b93c7] transition-colors font-semibold"
+              >
+                Дахин үзэх
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
 
-              <div className="mt-4 text-sm text-[#d0ccc7]">
+      {/* Modal */}
+      {isOpen && selected && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            onClick={closeModal}
+            className="absolute inset-0 bg-black/70 backdrop-blur-md"
+          ></div>
+          <div className="relative max-w-md w-full mx-4 bg-[#071017] rounded-3xl shadow-xl p-6 animate-fadeIn">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-white text-xl hover:text-[#00a6e1]"
+            >
+              ✕
+            </button>
+            <div className="flex flex-col items-center gap-4">
+              <div className="text-6xl">{selected.flag}</div>
+              <div className="text-2xl font-bold">{selected.name}</div>
+              <div className="text-[#a39e98]">Нийслэл: {selected.capital}</div>
+              <div className="mt-4 text-sm text-[#d0ccc7] space-y-2">
                 <p>
                   <strong>Бүс нутаг:</strong> {selected.region}
                 </p>
-                <p className="mt-2">
+                <p>
                   <strong>Дэд бүс:</strong> {selected.subregion}
                 </p>
-                <p className="mt-2">
+                <p>
                   <strong>Хүн ам:</strong> {selected.population}
                 </p>
-                <p className="mt-2">
+                <p>
                   <strong>Газар нутгийн хэмжээ:</strong> {selected.area}
                 </p>
-                <p className="mt-2">
+                <p>
                   <strong>Валют:</strong> {selected.currency}
                 </p>
-                <p className="mt-2">
+                <p>
                   <strong>Албан ёсны хэл(үүд):</strong> {selected.languages}
                 </p>
               </div>
-
-              <div className="mt-6 flex justify-end">
-                <button
-                  onClick={closeModal}
-                  className="px-4 py-2 rounded-md bg-[#0b93c7] text-white"
-                >
-                  Хаах
-                </button>
-              </div>
+              <button
+                onClick={closeModal}
+                className="mt-6 px-6 py-2 rounded-xl bg-gradient-to-r from-[#0b93c7] to-[#00a6e1] hover:from-[#00a6e1] hover:to-[#0b93c7] text-white font-semibold"
+              >
+                Хаах
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

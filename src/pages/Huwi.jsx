@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function Test() {
-  // Жишээ өгөгдөл
   const students = [
     { rank: 1, name: "Бат", score: 98 },
     { rank: 2, name: "Сараа", score: 95 },
@@ -15,40 +14,36 @@ export default function Test() {
     { rank: 10, name: "Халиун", score: 80 },
   ];
 
-  // Одоогийн хэрэглэгчийн мэдээлэл (жишээ нь)
   const currentUser = { rank: 15, name: "Та", score: 72 };
-
-  // currentUser эхний 10-д байгаа эсэхийг шалгана
   const isInTop10 = students.some((s) => s.name === currentUser.name);
 
   return (
-    <div className="bg-[#01060c] min-h-screen">
-      <div className="max-w-6xl mx-auto bg-[#01060c] min-h-screen relative p-6">
-        {/* Back button + header */}
-        <div className="flex items-start gap-4 mb-6">
+    <div className="bg-[#01060c] min-h-screen text-white">
+      <div className="max-w-6xl mx-auto p-6">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-6">
           <Link
             href="/nuur"
-            className="flex items-center  text-sm pt-[20px] rounded-md gap-2 px-3 "
+            className="flex items-center gap-2 text-sm hover:text-[#00a6e1] transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-4 w-4 text-white"
+              className="h-4 w-4"
             >
               <path d="m12 19-7-7 7-7"></path>
               <path d="M19 12H5"></path>
             </svg>
-            <span className="text-white">Буцах</span>
+            Буцах
           </Link>
           <div>
-            <h2 className="text-2xl text-white font-bold">Миний прогресс</h2>
+            <h2 className="text-2xl font-bold">Миний прогресс</h2>
             <p className="text-[#a39e98]">
               Суралцах явцын дэлгэрэнгүй мэдээлэл
             </p>
@@ -56,36 +51,26 @@ export default function Test() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="bg-[#0D171F] h-9 items-center justify-center rounded-lg p-[3px] grid w-full grid-cols-4 shadow-md mb-8">
-          <Link
-            href="/Ahits"
-            className="flex text-white items-center hover:bg-[#01060C] justify-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors"
-          >
-            Ерөнхий
-          </Link>
-          <Link
-            href="/Testuud"
-            className="flex text-white items-center hover:bg-[#01060C] justify-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors"
-          >
-            Тестүүд
-          </Link>
-          <Link
-            href="/Angi"
-            className="flex text-white items-center hover:bg-[#01060C] justify-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors"
-          >
-            Ангийн амжилтууд
-          </Link>
-          <Link
-            href="/Huwi"
-            className="flex text-white items-center justify-center gap-1.5 rounded-md hover:bg-[#01060C] px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors"
-          >
-            Хувийн амжилтууд
-          </Link>
+        <div className="bg-[#0D171F] h-10 grid grid-cols-4 rounded-lg shadow-md mb-8">
+          {[
+            { href: "/Ahits", label: "Ерөнхий" },
+            { href: "/Testuud", label: "Тестүүд" },
+            { href: "/Angi", label: "Ангийн амжилтууд" },
+            { href: "/Huwi", label: "Хувийн амжилтууд" },
+          ].map((tab) => (
+            <Link
+              key={tab.href}
+              href={tab.href}
+              className="flex justify-center items-center text-sm font-medium hover:bg-[#01060c] transition-colors rounded-md"
+            >
+              {tab.label}
+            </Link>
+          ))}
         </div>
 
-        {/* 11-р ангийн эхний 10 байр */}
+        {/* Top 10 Students */}
         <div className="mt-6">
-          <h2 className="text-xl text-white font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4">
             11-р ангийн эхний 10 байр
           </h2>
           <div className="overflow-hidden rounded-xl shadow-lg border border-[#1e293b]">
@@ -101,9 +86,9 @@ export default function Test() {
                 {students.map((s) => (
                   <tr
                     key={s.rank}
-                    className={`transition-colors ${
+                    className={`transition-all duration-300 ${
                       s.name === currentUser.name
-                        ? "bg-[#1e293b] font-bold text-yellow-300"
+                        ? "bg-gradient-to-r from-yellow-400/30 via-yellow-400/20 to-yellow-400/30 font-bold text-yellow-300 animate-pulse"
                         : "hover:bg-[#1e293b]/60"
                     }`}
                   >
@@ -116,12 +101,10 @@ export default function Test() {
             </table>
           </div>
 
-          {/* Хэрэв хэрэглэгч эхний 10-д байхгүй бол тусад нь харуулна */}
+          {/* Current user info */}
           {!isInTop10 && (
             <div className="mt-6 p-4 rounded-xl border border-[#1e293b] bg-[#0D171F] shadow-lg">
-              <h3 className="text-lg text-white font-semibold mb-2">
-                Таны байр
-              </h3>
+              <h3 className="text-lg font-semibold mb-2">Таны байр</h3>
               <p className="text-[#cbd5e1]">
                 Та{" "}
                 <span className="text-yellow-300 font-bold">
