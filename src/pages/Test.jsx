@@ -6,12 +6,12 @@ export default function Test() {
 
   const questionsData = [
     {
-      question: "Тайланд улсын нийслэл хэн бэ?",
+      question: "Тайланд улсын нийслэл юу вэ?",
       options: ["Киев", "Каир", "Улаанбаатар", "Бангкок"],
       correct: "Бангкок",
     },
     {
-      question: "Монгол улсын нийслэл аль вэ?",
+      question: "Монгол улсын нийслэл юу вэ?",
       options: ["Улаанбаатар", "Баку", "Абу-Даби", "Ереван"],
       correct: "Улаанбаатар",
     },
@@ -42,13 +42,11 @@ export default function Test() {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [results, setResults] = useState([]);
-  const [userXP, setUserXP] = useState(0); // оноо 0-оос эхлэх
-  const [timeLeft, setTimeLeft] = useState(60); // секундээр
+  const [userXP, setUserXP] = useState(0); 
+  const [timeLeft, setTimeLeft] = useState(60); 
 
   const current = questionsData[currentIndex];
   const progress = ((currentIndex + 1) / questionsData.length) * 100;
-
-  // Эхлэхэд хадгалсан оноо байвал унших
   useEffect(() => {
     const savedXP = localStorage.getItem("userXP");
     if (savedXP) {
@@ -63,7 +61,7 @@ export default function Test() {
       setScore((prev) => prev + 1);
       setUserXP((prev) => {
         const newXP = prev + 50;
-        localStorage.setItem("userXP", newXP); // оноо хадгалах
+        localStorage.setItem("userXP", newXP); 
         return newXP;
       });
     }
@@ -90,7 +88,6 @@ export default function Test() {
     router.push("/nuur");
   };
 
-  // 1 минутын таймер
   useEffect(() => {
     if (finished) return;
     const timer = setInterval(() => {
