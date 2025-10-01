@@ -43,7 +43,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="text"
-            placeholder="Нэвтрэх нэр (ж: user)"
+            placeholder="Нэвтрэх нэр (user)"
             className="w-full px-4 py-2 border border-gray-600 bg-[#0f172a] text-white rounded-lg focus:border-[#60a5fa] focus:ring-2 focus:ring-[#60a5fa] outline-none transition"
             aria-label="Нэвтрэх нэр"
           />
@@ -57,7 +57,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            placeholder="Нууц үг"
+            placeholder="Нууц үг(1234)"
             className="w-full px-4 py-2 border border-gray-600 bg-[#0f172a] text-white rounded-lg focus:border-[#60a5fa] focus:ring-2 focus:ring-[#60a5fa] outline-none transition"
             aria-label="Нууц үг"
           />
