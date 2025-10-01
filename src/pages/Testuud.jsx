@@ -50,7 +50,7 @@ export default function Testuud() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-4 w-4"
+              className="h-4 w-4 text-white"
             >
               <path d="m12 19-7-7 7-7"></path>
               <path d="M19 12H5"></path>
